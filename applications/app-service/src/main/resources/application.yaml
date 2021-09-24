@@ -13,4 +13,4 @@ spring:
     include: null
   data:
     mongodb:
-      uri: "mongodb://localhost:27017/test"
+      uri: "mongodb+srv://vegodiego:Ensiferum93+@cluster0.xgv7b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
