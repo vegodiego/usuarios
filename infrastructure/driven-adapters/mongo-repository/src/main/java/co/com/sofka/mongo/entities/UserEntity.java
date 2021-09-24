@@ -3,7 +3,7 @@ package co.com.sofka.mongo.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/*
+
 @Document(collection = "Users" )
 public class UserEntity {
     @Id
@@ -44,5 +44,3 @@ public class UserEntity {
         this.description = description;
     }
 }
-
- */
