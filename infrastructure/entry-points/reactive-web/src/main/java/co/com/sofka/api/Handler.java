@@ -1,5 +1,6 @@
 package co.com.sofka.api;
 
+import co.com.sofka.usecase.user.CreateUserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -9,20 +10,12 @@ import reactor.core.publisher.Mono;
 @Component
 @RequiredArgsConstructor
 public class Handler {
-//private  final UseCase useCase;
-//private  final UseCase2 useCase2;
-    public Mono<ServerResponse> listenGETUseCase(ServerRequest serverRequest) {
-        // usecase.logic();
-        return ServerResponse.ok().body("", String.class);
-    }
 
-    public Mono<ServerResponse> listenGETOtherUseCase(ServerRequest serverRequest) {
-        // useCase2.logic();
-        return ServerResponse.ok().body("", String.class);
-    }
+    private final CreateUserUseCase createUserUseCase;
+    private final MapperUserDTO mapperUserDTO;
 
-    public Mono<ServerResponse> listenPOSTUseCase(ServerRequest serverRequest) {
-        // usecase.logic();
-        return ServerResponse.ok().body("", String.class);
+
+    public Mono<UserDTO> createUser(UserDTO usuarioDTO) {
+        return createUserUseCase.execute(mapperUserDTO.ToUser().apply(usuarioDTO)).map(mapperUserDTO.toDTO());
     }
 }
