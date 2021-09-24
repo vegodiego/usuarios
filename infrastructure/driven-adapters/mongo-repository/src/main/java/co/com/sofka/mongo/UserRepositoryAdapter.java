@@ -7,6 +7,7 @@ import co.com.sofka.mongo.helper.AdapterOperations;
 import co.com.sofka.mongo.helper.UserMapper;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -22,5 +23,10 @@ implements UserRepository{
     @Override
     public Mono<User> addUser(User user){
         return this.repository.save(userMapper.fromUser().apply(user)).map(userMapper.fromUserEntity());
+    }
+
+    @Override
+    public Flux<User> listUsers(){
+        return this.repository.findAll().map(userMapper.fromUserEntity());
     }
 }
