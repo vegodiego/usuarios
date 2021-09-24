@@ -9,5 +9,7 @@ public interface UserRepository {
     Mono<User> addUser(User user);
 
     Flux<User> listUsers();
+
+    Mono<User> listUser(String id);
 }
 

@@ -35,4 +35,12 @@ public class Router {
                         .body(BodyInserters.fromPublisher(handler.getUsers(), UserDTO.class))
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> getUser(Handler handler) {
+        return route(GET("/api/usuario/porId/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .body(handler.getUser(request.pathVariable("id")), UserDTO.class)
+        );
+    }
 }

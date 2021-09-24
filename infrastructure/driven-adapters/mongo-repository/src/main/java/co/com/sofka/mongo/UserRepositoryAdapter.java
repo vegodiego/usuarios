@@ -29,4 +29,9 @@ implements UserRepository{
     public Flux<User> listUsers(){
         return this.repository.findAll().map(userMapper.fromUserEntity());
     }
+
+    @Override
+    public Mono<User> listUser(String id){
+        return this.repository.findById(id).map(userMapper.fromUserEntity());
+    }
 }
