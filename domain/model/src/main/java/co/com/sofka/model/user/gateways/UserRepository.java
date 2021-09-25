@@ -15,5 +15,7 @@ public interface UserRepository {
     Mono<User> listUserByEmail(String email);
 
     Mono<User> updateUser(User user);
+
+    Mono<Void> deleteUser(String id);
 }
 

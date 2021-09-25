@@ -44,4 +44,9 @@ implements UserRepository{
     public Mono<User> updateUser(User user){
         return this.repository.save(userMapper.fromUser().apply(user)).map(userMapper.fromUserEntity());
     }
+
+    @Override
+    public Mono<Void> deleteUser(String id){
+        return this.repository.deleteById(id).then(Mono.empty());
+    }
 }

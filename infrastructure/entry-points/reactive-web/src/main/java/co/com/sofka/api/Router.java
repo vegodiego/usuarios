@@ -69,4 +69,12 @@ public class Router {
                         })
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> removeUser(Handler handler) {
+        return route(DELETE("/api/usuario/eliminar/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .body(handler.removeUser(request.pathVariable("id")), void.class)
+        );
+    }
 }
