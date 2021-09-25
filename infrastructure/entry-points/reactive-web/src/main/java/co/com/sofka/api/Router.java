@@ -77,4 +77,12 @@ public class Router {
                         .body(handler.removeUser(request.pathVariable("id")), void.class)
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> removeUserByEmail(Handler handler) {
+        return route(DELETE("/api/usuario/eliminarPorEmail/{email}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .body(handler.removeUserByEmail(request.pathVariable("email")), void.class)
+        );
+    }
 }

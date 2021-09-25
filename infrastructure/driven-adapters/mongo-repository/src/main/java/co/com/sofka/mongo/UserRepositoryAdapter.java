@@ -49,4 +49,9 @@ implements UserRepository{
     public Mono<Void> deleteUser(String id){
         return this.repository.deleteById(id).then(Mono.empty());
     }
+
+    @Override
+    public Mono<Void> deleteUserByEmail(String email){
+        return this.repository.deleteByEmail(email).then(Mono.empty());
+    }
 }

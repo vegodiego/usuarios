@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class DeleteUserUseCase {
+public class DeleteUserByEmailUseCase {
     private final UserRepository userRepository;
 
-    public Mono<Void> execute(String id){
-        return userRepository.deleteUser(id);
+    public Mono<Void> execute(String email){
+        return userRepository.deleteUserByEmail(email);
     }
 }

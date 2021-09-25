@@ -19,6 +19,7 @@ public class Handler {
     private final ListUserByEmailUseCase listUserByEmailUseCase;
     private final UpdateUserUseCase updateUserUseCase;
     private final DeleteUserUseCase deleteUserUseCase;
+    private final DeleteUserByEmailUseCase deleteUserByEmailUseCase;
 
     public Mono<UserDTO> createUser(UserDTO userDTO) {
         return createUserUseCase.execute(mapperUserDTO.ToUser().apply(userDTO)).map(mapperUserDTO.toDTO());
@@ -58,5 +59,9 @@ public class Handler {
 
     public Mono<Void> removeUser(String id) {
         return deleteUserUseCase.execute(id).then(Mono.empty());
+    }
+
+    public Mono<Void> removeUserByEmail(String email) {
+        return deleteUserByEmailUseCase.execute(email).then(Mono.empty());
     }
 }
