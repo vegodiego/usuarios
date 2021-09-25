@@ -11,5 +11,7 @@ public interface UserRepository {
     Flux<User> listUsers();
 
     Mono<User> listUser(String id);
+
+    Mono<User> listUserByEmail(String email);
 }
 

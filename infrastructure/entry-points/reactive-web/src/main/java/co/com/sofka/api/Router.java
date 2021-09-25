@@ -43,4 +43,12 @@ public class Router {
                         .body(handler.getUser(request.pathVariable("id")), UserDTO.class)
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> getUserByEmail(Handler handler) {
+        return route(GET("/api/usuario/porEmail/{email}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .body(handler.getUserByEmail(request.pathVariable("email")), UserDTO.class)
+        );
+    }
 }
