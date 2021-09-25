@@ -1,9 +1,6 @@
 package co.com.sofka.api;
 
-import co.com.sofka.usecase.user.CreateUserUseCase;
-import co.com.sofka.usecase.user.ListUserByEmailUseCase;
-import co.com.sofka.usecase.user.ListUserUseCase;
-import co.com.sofka.usecase.user.ListUsersUseCase;
+import co.com.sofka.usecase.user.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -20,6 +17,7 @@ public class Handler {
     private final ListUsersUseCase listUsersUseCase;
     private final ListUserUseCase listUserUseCase;
     private final ListUserByEmailUseCase listUserByEmailUseCase;
+    private final UpdateUserUseCase updateUserUseCase;
 
     public Mono<UserDTO> createUser(UserDTO userDTO) {
         return createUserUseCase.execute(mapperUserDTO.ToUser().apply(userDTO)).map(mapperUserDTO.toDTO());
@@ -52,4 +50,9 @@ public class Handler {
                     return user;
                 });
     }
+
+    public Mono<UserDTO> modifyUser(UserDTO userDTO) {
+        return updateUserUseCase.execute(mapperUserDTO.ToUser().apply(userDTO)).map(mapperUserDTO.toDTO());
+    }
+
 }

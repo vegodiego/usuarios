@@ -51,4 +51,22 @@ public class Router {
                         .body(handler.getUserByEmail(request.pathVariable("email")), UserDTO.class)
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> modifyUser(Handler handler) {
+        return route(PUT("/api/usuario/modificar").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(UserDTO.class)
+                        .flatMap(userDTO -> handler.modifyUser(userDTO)
+                                .flatMap(result -> ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result))
+                        )
+                        .onErrorResume(error -> {
+                            if(error instanceof IllegalAccessError){
+                                return ServerResponse.badRequest().bodyValue("El usuario no existe");
+                            }
+                            return ServerResponse.badRequest().build();
+                        })
+        );
+    }
 }

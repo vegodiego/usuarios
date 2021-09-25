@@ -39,4 +39,9 @@ implements UserRepository{
     public Mono<User> listUserByEmail(String email){
         return this.repository.findByEmail(email).map(userMapper.fromUserEntity());
     }
+
+    @Override
+    public Mono<User> updateUser(User user){
+        return this.repository.save(userMapper.fromUser().apply(user)).map(userMapper.fromUserEntity());
+    }
 }
